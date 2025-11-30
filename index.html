@@ -1,109 +1,210 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Правила AnonEKB</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BestWorld — Донат</title>
+<style>
     body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #0a0a0d, #12121a, #0d0d14);
-      color: #e5e5e5;
-      padding: 40px 20px;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      animation: fadeBg 8s infinite alternate;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #e9f0ff;
     }
 
-    @keyframes fadeBg {
-      from { background-position: 0% 0%; }
-      to { background-position: 100% 100%; }
+    /* Баннер */
+    .banner {
+        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+        padding: 55px 0;
+        text-align: center;
+        color: white;
+        font-size: 52px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        text-shadow: 0 0 20px rgba(255,255,255,0.9);
+        animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        to { text-shadow: 0 0 25px rgba(255,255,255,0.9); }
+    }
+
+    /* Контейнер */
+    .container {
+        display: flex;
+    }
+
+    /* Боковое меню всегда открыто */
+    .sidebar {
+        width: 230px;
+        background: linear-gradient(180deg, #3a7bd5, #6ec6ff);
+        padding: 35px 25px;
+        font-size: 22px;
+        color: white;
+        box-shadow: 2px 0 20px rgba(0,0,0,0.15);
+        flex-shrink: 0;
+    }
+    .sidebar a {
+        display: block;
+        color: white;
+        margin-bottom: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .sidebar a:hover {
+        transform: translateX(5px);
+        color: #1a4f9f;
+    }
+
+    /* Контент */
+    .content {
+        flex: 1;
+        padding: 50px;
+        background: white;
+        min-height: 85vh;
+    }
+
+    /* Карточки доната */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 70px;
     }
 
     .card {
-      background: rgba(20, 20, 30, 0.85);
-      backdrop-filter: blur(12px);
-      padding: 45px;
-      border-radius: 25px;
-      max-width: 900px;
-      width: 100%;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      animation: popIn 0.8s ease;
+        background: linear-gradient(145deg, #ffffff, #e3efff);
+        padding: 35px;
+        border-radius: 22px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        transition: 0.35s;
+        border: 1px solid #ffffff;
     }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.97) translateY(25px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+    .card:hover {
+        transform: translateY(-12px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(0, 153, 255,0.45);
+        background: linear-gradient(145deg, #f6fbff, #d9eaff);
     }
 
-    h1 {
-      text-align: center;
-      font-size: 34px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #ffffff;
-      text-shadow: 0 0 10px #6c63ff;
+    .card-title {
+        font-size: 28px;
+        margin-bottom: 10px;
     }
 
-    h2 {
-      font-size: 22px;
-      margin-top: 35px;
-      color: #8e87ff;
-      border-left: 4px solid #8e87ff;
-      padding-left: 10px;
+    .card-price {
+        font-size: 22px;
+        margin-bottom: 20px;
     }
 
-    p, li {
-      line-height: 1.7;
-      font-size: 18px;
+    .buy-btn {
+        display: inline-block;
+        padding: 14px 25px;
+        background: linear-gradient(135deg, #0099ff, #3b79e3);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 18px;
+        text-decoration: none;
+        transition: 0.3s;
+        box-shadow: 0 0 12px rgba(74,137,216,0.45);
     }
 
-    ul {
-      padding-left: 20px;
+    .buy-btn:hover {
+        background: #4a89d8;
+        box-shadow: 0 0 15px rgba(74,137,216,0.5);
     }
 
-    li::marker {
-      color: #7b74ff;
+    /* Адаптив */
+    @media (max-width: 900px) {
+        .container {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+        }
+        .cards {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
     }
 
-    .highlight {
-      color: #9d95ff;
-      font-weight: 600;
+    @media (max-width: 550px) {
+        .cards {
+            grid-template-columns: 1fr;
+        }
+        .banner {
+            font-size: 32px;
+            padding: 25px 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .card {
+            padding: 20px;
+        }
     }
-  </style>
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>📰 Правила Telegram-канала «AnonEKB» — Новостник Экибастуз</h1>
 
-    <h2>1. Общие правила канала</h2>
+<div class="banner">BestWorld</div>
 
-    <p><span class="highlight">1.</span> Канал посвящён новостям города Екибастуз: происшествия, городские события, социальные вопросы, заметки от жителей, школьные происшествия и т.д.</p>
+<div class="container">
+    <div class="sidebar">
+        <a href="https://t.me/Best_World11">поддержка</a>
+        <a href="https://t.me/Best_World11">Связь с нами</a>
+    </div>
 
-    <p><span class="highlight">2.</span> Уважайте читателей и модераторов. Любые оскорбления, угрозы или токсичность строго запрещены.</p>
+    <div class="content">
+        <div class="cards">
+            <div class="card">
+                <div class="card-title">Legend</div>
+                <div class="card-price">Цена: 15 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Imperator</div>
+                <div class="card-price">Цена: 45 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Storm</div>
+                <div class="card-price">Цена: 70 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Support</div>
+                <div class="card-price">Цена: 149 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Eternity</div>
+                <div class="card-price">Цена: 299 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Unlimited</div>
+                <div class="card-price">Цена: 699 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Кубики</div>
+                <div class="card-price">Цена за 1ш: 1 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+            <div class="card">
+                <div class="card-title">Донат Кейс</div>
+                <div class="card-price">Цена: 110 ₽</div>
+                <a href="https://funpay.com/users/13084044/" class="buy-btn">Купить</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <p><span class="highlight">3.</span> Запрещены публикации, содержащие:</p>
-    <ul>
-      <li>заведомо ложную информацию,</li>
-      <li>клевету,</li>
-      <li>разжигание национальной, религиозной или иной вражды,</li>
-      <li>дискриминацию,</li>
-      <li>экстремизм,</li>
-      <li>пропаганду насилия, наркотиков, оружия,</li>
-      <li>политическую агитацию вне информационного характера.</li>
-    </ul>
-
-    <p><span class="highlight">4.</span> Публикация частных данных (адресов, телефонов, личной информации) без согласия людей запрещена.</p>
-
-    <p><span class="highlight">5.</span> По вопросам рекламы — писать модератору.</p>
-
-    <p><span class="highlight">6.</span> Канал не несёт ответственности за субъективные сообщения от читателей, однако материалы проходят проверку перед публикацией.</p>
-  </div>
-  
 </body>
 </html>
